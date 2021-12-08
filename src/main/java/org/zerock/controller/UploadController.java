@@ -37,40 +37,6 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadController {
 
 	
-	
-	@GetMapping("/uploadForm")  
-	public void uploadForm() {
-
-		log.info("upload form");
-	}
-
-	
-	
-	@PostMapping("/uploadFormAction")
-	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-		
-		String uploadFolder = "C:\\upload";
-		
-		for (MultipartFile multipartFile : uploadFile) {
-
-			log.info("-------------------------------------");
-			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-			log.info("Upload File Size: " + multipartFile.getSize());
-
-			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-
-			log.info("saveFile : "+saveFile);
-			
-			try { 
-				multipartFile.transferTo(saveFile);
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}  //end catch
-		}  //end for
-
-	}
-
-	
 	private boolean checkImageType(File file) {//
 
 		try {
@@ -135,10 +101,9 @@ public class UploadController {
 
 				attachDTO.setUploadPath(uploadFolderPath);
 
-				if (checkImageType(saveFile)) {
-
+				if (checkImageType(saveFile) && multipartFile.getSize()<=5242880) {
 					attachDTO.setImage(true);
-				}
+				} 
 				list.add(attachDTO);
 
 			} catch (Exception e) {
@@ -186,7 +151,7 @@ for (MultipartFile multipartFile : tuploadFile) {
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 200, 200);
 					
 					thumbnail.close();
-				
+					
 				list.add(attachDTO);
 
 			} catch (Exception e) {
@@ -264,6 +229,41 @@ for (MultipartFile multipartFile : tuploadFile) {
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type) {
+
+		log.info("deleteFile: " + fileName);
+		log.info("deleteFile type: " + type);
+
+		File file;
+
+		try {
+			file = new File("C:\\kym\\eclipse\\workspace\\modify\\src\\main\\webapp\\resources" + URLDecoder.decode(fileName, "UTF-8"));
+			log.info("00000 " +  URLDecoder.decode(fileName, "UTF-8"));
+			file.delete();
+
+	
+			if (type.equals("image")) {
+
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+
+				log.info("largeFileName: " + largeFileName);
+
+				file = new File(largeFileName);
+
+				file.delete();
+			}
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+
+	}
+	
+	@PostMapping("/tdeleteFile")
+	@ResponseBody
+	public ResponseEntity<String> tdeleteFile(String fileName, String type) {
 
 		log.info("deleteFile: " + fileName);
 		log.info("deleteFile type: " + type);

@@ -13,9 +13,10 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/js/update.js"></script>
+<script type="text/javascript" src="/resources/js/thmUpdate.js"></script>
 </head>
 <body>
-	<form action="update" method="post">
+	<form role='form' action="update" method="post">
 		<table border=1>
 	    	<tr><input type="hidden" name="bno" id="Bno" value="${update.bno}"></tr>
 	    	<tr><td>제목</td><td><input type="text" name="title" value="${update.title}"></td></tr>
@@ -23,20 +24,37 @@
 	    	<tr><td>작성자</td><td>${update.writer}</td></tr>
 			<tr><td>작성일자</td><td>${update.date}</td></tr>
 		</table>
-		<input type="submit" value="수정하기">
+		<input type="submit" id="update" value="수정하기">
 	
-		<div class='tuploadDiv'>
-			<input type='file'  name='uploadFile' multiple>
+		<div>
+			<h2>파일 업로드</h2>	
+			<div class='uploadDiv'>
+				<input type='file'  name='uploadFile' multiple>
+			</div>
+			<div class='uploadResult'>
+				<ul>
+				</ul>
+			</div>  
 		</div>
-		<div class='uploadResult'>
-			<ul>
-			</ul>
-		</div>  
-<!-- 		<div class='tuploadResult'> -->
-<!-- 			<ul> -->
-<!-- 			</ul> -->
-<!-- 		</div>   -->
+		
+		<div>
+			<h2>썸네일</h2>
+			<div class='tuploadDiv'>
+				<input type='file'  name='tuploadFile'>
+			</div>
+			<div class='tuploadResult'>
+				<ul>
+					<li>
+						<input type="hidden" id="ofn" value="${update.t}">
+						<span id="txt"></span>
+						<input type=button id="uBtn" value="X">
+					</li>
+				</ul>
+			</div>  
+		</div>
 	</form>
-	
+<script type="text/javascript">
+
+</script>
 </body>
 </html>

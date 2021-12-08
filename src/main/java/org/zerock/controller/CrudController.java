@@ -19,6 +19,7 @@ import org.zerock.domain.CrudVO;
 import org.zerock.domain.BoardAttachVO;
 import org.zerock.service.CrudService;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -29,6 +30,7 @@ public class CrudController {
 	
 	public CrudService service;
 	UploadController upload;
+	
 	@GetMapping("list")
 	public void list(Model model) {
 		model.addAttribute("list", service.list());
@@ -40,6 +42,10 @@ public class CrudController {
 	@PostMapping("create")
 	public String create(CrudVO vo, RedirectAttributes rttr, Model model) {
 		service.create(vo);
+		if(vo.getTitle().length()==0 && vo.getText().length()==0) {
+			return "create";
+		}
+		log.info(vo);
 		rttr.addAttribute("bno", vo.getBno());
 		return "redirect:/read";
 	}

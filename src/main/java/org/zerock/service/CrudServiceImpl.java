@@ -33,8 +33,6 @@ public class CrudServiceImpl implements CrudService {
 		if(vo.getAttachList()==null || vo.getAttachList().size()<=0 ) {
 			return;
 		}
-		
-		
 			vo.getAttachList().forEach(attach->{
 					//파일정보           =BoardAttachVO
 				attach.setBno(vo.getBno());
@@ -50,6 +48,7 @@ public class CrudServiceImpl implements CrudService {
 
 	@Override
 	public int update(CrudVO vo) {
+		
 		attachMapper.deleteAll(vo.getBno());
 		
 		int modifyResult = mapper.update(vo);
@@ -57,12 +56,12 @@ public class CrudServiceImpl implements CrudService {
 		if(modifyResult==1 && vo.getAttachList() != null && vo.getAttachList().size() > 0) {
 			
 			vo.getAttachList().forEach(attach -> {
-				
+				System.out.println("이거 실행 됨");
 				attach.setBno(vo.getBno());
 				attachMapper.insert(attach);
 			});
 		}
-		
+		System.out.println("위에꺼 실행 안됨");
 		return modifyResult;
 	}
 

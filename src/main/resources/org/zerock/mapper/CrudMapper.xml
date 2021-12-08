@@ -20,7 +20,8 @@
 	<update id="update">
 		update board
 		set title=#{title},
-			text=#{text}
+			text=#{text},
+			t=#{t}
 		where bno=#{bno}
 	</update>
 	<delete id="delete">

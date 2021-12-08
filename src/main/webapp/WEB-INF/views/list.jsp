@@ -27,7 +27,6 @@
 			</div></td>
 			</tr>
 		</table>
-			
 	</c:forEach>
 </body>
 </html>

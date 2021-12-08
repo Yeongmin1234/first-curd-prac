@@ -1,4 +1,4 @@
-/**
+ /**
  * 
  */
 $(document).ready(function(){
@@ -15,7 +15,7 @@ $(document).ready(function(){
 				str += "<span> "+attach.filename+"</span>";
                 str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
                 str += "data-type='image'>X</button><br>"
-				str +="<img src='/resources/img/"+attach.uuid +"_"+attach.filename+"'>";
+//				str +="<img src='/resources/img/"+attach.uuid +"_"+attach.filename+"'>";
 				str +="</div>";  
 				str +="</li>";  
 				}
@@ -23,6 +23,7 @@ $(document).ready(function(){
 			$(".uploadResult ul").html(str);
 		})//get제이슨
 		   $(".uploadResult").on("click","button", function(e){
+			e.preventDefault();
 			   if(confirm("삭제하시겠습니까?")){
 				var targetLi=(this).closest("li");
 				targetLi.remove();
@@ -105,7 +106,6 @@ $(document).ready(function(){
                str += "<span> "+ obj.fileName+"</span>";
                str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
                str += "data-type='image'>X</button><br>"
-//  			   str += "<img src='/resources/img"+fileCallPath+"'>";
                str += "</div>";
                str +="</li>";
             }else{ 
@@ -128,19 +128,12 @@ $(document).ready(function(){
 
 
 
+   var formObj=$("form[role='form']");
 
-
- var formObj=$("form[role='form']");
-
-   $("button").on("click",function(e){
+   $("input[type='submit']").on("click",function(e){
 
       e.preventDefault();
-      
-      var oper=$(this).data("oper");
-	  
-	if(oper=='delete'){
-		formObj.attr("action","delete")
-	}else if(oper=='update'){
+
 		var str="";
 		 $(".uploadResult ul li").each(function(i,obj){
     	  var jobj=$(obj);
@@ -152,8 +145,6 @@ $(document).ready(function(){
  
     	  });
       	formObj.append(str).submit();
-		}
-      formObj.submit();
    })// $("button[type='submit']") 끝
    
 

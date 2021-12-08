@@ -23,8 +23,21 @@
          
           <property name="username" value="root"></property>
           <property name="password" value="1111"></property>
-   </bean>
-   
+  	 </bean>
+<!--     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!--         <property name="locations"> -->
+<!--             <list> -->
+<!--                 <value>classpath:config/db.properties</value>  -->
+<!--             </list> -->
+<!--         </property> -->
+<!--     </bean>	 -->
+    
+<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/> -->
+<!--         <property name="url" value="jdbc:sqlserver://192.168.0.245, 1433;databaseName=gamedex_dev" /> -->
+<!--         <property name="username" value="sa"/> -->
+<!--         <property name="password" value="sa"/> -->
+<!--     </bean> -->
    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
    destroy-method="close">
    <constructor-arg ref="hikariConfig" />
@@ -43,7 +56,6 @@
    <mybatis-spring:scan base-package="org.zerock.mapper"/>
    
    <context:component-scan base-package="org.zerock.service"></context:component-scan>   
-   <!-- @Aspect를 찾는 역할을 할거야~!~!~!~!~!!! -->
    <context:component-scan base-package="org.zerock.aop"></context:component-scan>
    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
    
