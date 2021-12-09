@@ -2,24 +2,33 @@
  * 
  */
 $(document).ready(function(e){
-	
+	var ofn=$("#ofn").val();
 	
    var formObj=$("form[role='form']");
-
+//	$("input[name='uploadFile']").change(function(e) {
+//   $("input[type='submit']").on("click",function(e){
+//
+//      e.preventDefault();
+//      	alert("안바꿈")
+//      var str="";
+//      $(".tuploadResult ul li").each(function(i,obj){
+//    	  var jobj=$(obj);
+//		  str+="<input type='text' id='try' name='t' value='"+ofn+"'>";
+//      })
+//      formObj.append(str).submit();
+//   })// $("button[type='submit']") 끝
+//})
    $("input[type='submit']").on("click",function(e){
 
       e.preventDefault();
-      
+      	alert("안바꿈")
       var str="";
       $(".tuploadResult ul li").each(function(i,obj){
     	  var jobj=$(obj);
-    	  
-				
-		  str+="<input type='text' id='try' name='t' value='/resources/thumb"+"/s_"+jobj.data("uuid")+"_"+jobj.data("filename")+"'>"
+		  str+="<input type='text' id='try' name='t' value='"+ofn+"'>";
       })
       formObj.append(str).submit();
    })// $("button[type='submit']") 끝
-   
                      // 정규식
    var regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)$");
    var maxSize = 5242880; 
@@ -55,9 +64,23 @@ $(document).ready(function(e){
       var inputFile = $("input[name='tuploadFile']");
 
       var files = inputFile[0].files;
-
+	
       console.log(files);
+	$("input[type='submit']").on("click",function(e){
 
+      e.preventDefault();
+
+	alert("바꿈")
+      
+      var str="";
+      $(".tuploadResult ul li").each(function(i,obj){
+    	  var jobj=$(obj);
+		  str+="<input type='text' id='try' name='t' value='/resources/thumb"+"/s_"+jobj.data("uuid")+"_"+jobj.data("filename")+"'>";
+      })
+      formObj.append(str).submit();
+	var li = $(".tuploadResult ul").closest('li');
+		li.remove();
+   })// $("button[type='submit']") 끝
       for (var i = 0; i < files.length; i++) {
          // checkExtension함수 호출
          if (!checkExtension(files[i].name, files[i].size)) {

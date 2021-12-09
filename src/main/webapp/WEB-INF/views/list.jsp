@@ -16,7 +16,7 @@
 <body>
 	<c:forEach var="list" items="${list}">  
 		<table border=1>
-	    	<input type="hidden" name="bno" value=${list.bno} id="bno">
+<%-- 	    	<tr><td><input type="hidden" name="bno" value="${list.bno}" id="bno"></td></tr> --%>
 			<tr><td>제목</td><td><a href="/read?bno=${list.bno}">${list.title}</a></td></tr>
 			<tr><td>img</td><td><div class="uploadResult">
 					<div>

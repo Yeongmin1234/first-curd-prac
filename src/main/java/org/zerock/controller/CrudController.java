@@ -36,6 +36,17 @@ public class CrudController {
 		model.addAttribute("list", service.list());
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("create")
 	public void create() {
 	}
