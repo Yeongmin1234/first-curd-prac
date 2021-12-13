@@ -40,7 +40,7 @@
 		<div>
 			<h2>썸네일</h2>
 			<div class='tuploadDiv'>
-				<input type='file'  name='tuploadFile'>
+				<input type='file' id="thumb" name='tuploadFile'>
 			</div>
 			<div class='tuploadResult'>
 				<ul>

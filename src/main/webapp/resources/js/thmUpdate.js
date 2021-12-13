@@ -5,31 +5,24 @@ $(document).ready(function(e){
 	var ofn=$("#ofn").val();
 	
    var formObj=$("form[role='form']");
-//	$("input[name='uploadFile']").change(function(e) {
-//   $("input[type='submit']").on("click",function(e){
-//
-//      e.preventDefault();
-//      	alert("안바꿈")
-//      var str="";
-//      $(".tuploadResult ul li").each(function(i,obj){
-//    	  var jobj=$(obj);
-//		  str+="<input type='text' id='try' name='t' value='"+ofn+"'>";
-//      })
-//      formObj.append(str).submit();
-//   })// $("button[type='submit']") 끝
-//})
+
    $("input[type='submit']").on("click",function(e){
 
       e.preventDefault();
-      	alert("안바꿈")
-      var str="";
-      $(".tuploadResult ul li").each(function(i,obj){
-    	  var jobj=$(obj);
-		  str+="<input type='text' id='try' name='t' value='"+ofn+"'>";
+      	
+		var str=""
+	if($("#txt").text()==""){
+	 $(".tuploadResult ul li").each(function(i,obj){
+	    	  var jobj=$(obj);
+			  str+="<input type='text' id='try' name='t' value='/resources/thumb"+"/s_"+jobj.data("uuid")+"_"+jobj.data("filename")+"'>";
+	      })
+		}else{
+      $(".tuploadResult ul li").each(function(i){
+		 str+="<input type='text' id='try' name='t' value='"+ofn+"'>";
       })
+		}
       formObj.append(str).submit();
-   })// $("button[type='submit']") 끝
-                     // 정규식
+   })
    var regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)$");
    var maxSize = 5242880; 
    // checkExtension함수 선언
@@ -45,42 +38,34 @@ $(document).ready(function(e){
          return false;
       }
       return true;
-   } // checkExtension함수 끝
+   } 
+
+
 	var ofn=$("#ofn").val();
 	var txt=$("#txt");
 	var last=ofn.charAt(ofn.length-1)
 	var cut=ofn.substring(56,ofn.indexOf(last))
+	var li = $("#uBtn").closest('li');
 	txt.html(cut+last);
 	$("#uBtn").on("click",function(){
 		if(confirm("삭제하시겠습니까?")){
-		var li = $("#uBtn").closest('li');
 		li.remove();	
 		}
 	})
-   $("input[name='tuploadFile']").change(function(e) {
 
+
+	
+
+   $("input[name='tuploadFile']").change(function(e) {
+	
       var formData = new FormData();
 
       var inputFile = $("input[name='tuploadFile']");
 
       var files = inputFile[0].files;
-	
+
       console.log(files);
-	$("input[type='submit']").on("click",function(e){
 
-      e.preventDefault();
-
-	alert("바꿈")
-      
-      var str="";
-      $(".tuploadResult ul li").each(function(i,obj){
-    	  var jobj=$(obj);
-		  str+="<input type='text' id='try' name='t' value='/resources/thumb"+"/s_"+jobj.data("uuid")+"_"+jobj.data("filename")+"'>";
-      })
-      formObj.append(str).submit();
-	var li = $(".tuploadResult ul").closest('li');
-		li.remove();
-   })// $("button[type='submit']") 끝
       for (var i = 0; i < files.length; i++) {
          // checkExtension함수 호출
          if (!checkExtension(files[i].name, files[i].size)) {
@@ -114,7 +99,9 @@ $(document).ready(function(e){
             return;
          }
          var uploadUL = $(".tuploadResult ul");
-         
+        
+		uploadUL.find('li').remove();
+		
          var str = "";
          
          $(uploadResultArr).each(function(i, obj){
@@ -128,7 +115,6 @@ $(document).ready(function(e){
                str += "<span> "+ obj.fileName+"</span>";
                str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
                str += "data-type='image'>X</button><br>"
-//			   str += "<img src='/resources/img"+fileCallPath+"'>";
                str += "</div>";
                str +="</li>";
             } 
