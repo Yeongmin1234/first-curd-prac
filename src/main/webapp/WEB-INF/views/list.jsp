@@ -14,6 +14,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
+	<div>
+		<select name="type">						<!-- jsp의 name과 Criteria의 병수명이 일치하면 알아서 정보를 수집한다. -->
+	                                <option value="" <c:out value="${pageMaker.cri.type==null?'selected':''}" />>--</option>
+	                                <option value="T" <c:out value="${pageMaker.cri.type=='T'?'selected':''}" />>제목</option>
+	                                <option value="C" <c:out value="${pageMaker.cri.type=='C'?'selected':''}" />>내용</option>
+	                                <option value="W" <c:out value="${pageMaker.cri.type=='W'?'selected':''}" />>작성자</option>
+	                                <option value="TC" <c:out value="${pageMaker.cri.type=='TC'?'selected':''}" />>제목+내용</option>
+	                            </select>
+	</div>
 	<c:forEach var="list" items="${list}">  
 		<table border=1>
 <%-- 	    	<tr><td><input type="hidden" name="bno" value="${list.bno}" id="bno"></td></tr> --%>

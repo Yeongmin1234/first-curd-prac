@@ -27,4 +27,14 @@
 	<delete id="delete">
 		delete from board where bno=#{bno}
 	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

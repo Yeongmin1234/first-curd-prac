@@ -74,4 +74,12 @@ public class CrudServiceImpl implements CrudService {
 	public List<BoardAttachVO> getAttachList(int bno) {
 		return attachMapper.findByBno(bno);
 	}
+
+	
+	
+	
+	
+	
+	
+	
 }

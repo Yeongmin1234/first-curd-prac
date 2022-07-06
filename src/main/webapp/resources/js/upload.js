@@ -38,6 +38,7 @@ $(document).ready(function(e){
       })
 	  formObj.append(tstr).submit();
       formObj.append(str).submit();
+//      formObj.append(tstr);
 //      formObj.append(str);
    })// $("button[type='submit']") 끝
    
@@ -60,7 +61,6 @@ $(document).ready(function(e){
    } // checkExtension함수 끝
 
    $("input[name='uploadFile']").change(function(e) {
-
       var formData = new FormData();
 
       var inputFile = $("input[name='uploadFile']");
@@ -87,12 +87,16 @@ $(document).ready(function(e){
          dataType : 'json',
          success : function(result) {
       
-            console.log(result);
             
             showUploadResult(result);
       
 
-         }
+         },
+		error : function(xhr, status, er) {
+				if (error) {
+					error(er);
+				}
+			}
       }); //$.ajax
       
    }); //$("input[type='file']").change(function(e) { 이벤트 끝.
@@ -155,7 +159,7 @@ $("input[name='tuploadFile']").change(function(e) {
                str += "<span> "+ obj.fileName+"</span>";
                str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
                str += "data-type='image'>X</button><br>"
-//  			   str += "<img src='/resources/img"+fileCallPath+"'>";
+  			   str += "<img src='/resources/img"+"/"+obj.uuid +"_"+obj.fileName+"'>";
                str += "</div>";
                str +="</li>";
             }else{ 
@@ -189,8 +193,8 @@ $("input[name='tuploadFile']").change(function(e) {
            console.log(obj);
            
            if(obj.image){
-               var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-               str += "<li data-path='"+obj.uploadPath+"'";
+               var fileCallPath =  encodeURIComponent( "\\thumb/s_"+obj.uuid +"_"+obj.fileName);
+               str += "<li data-path='\\thumb'";
                str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
                str +=" ><div>";
                str += "<span> "+ obj.fileName+"</span>";
@@ -210,6 +214,7 @@ $("input[name='tuploadFile']").change(function(e) {
 		  var type = $(this).data("type");
 		  
 		  console.log(targetFile);
+		  console.log(type);
 			  var targetLi=(this).closest("li");
 		  
 		  $.ajax({
@@ -218,7 +223,7 @@ $("input[name='tuploadFile']").change(function(e) {
 		    dataType:'text',
 		    type: 'POST',
 		      success: function(result){
-		         alert(result);
+				console.log(result);
 		         targetLi.remove();
 		       }
 		  }); //$.ajax

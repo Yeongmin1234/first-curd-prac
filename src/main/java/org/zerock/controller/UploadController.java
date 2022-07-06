@@ -57,16 +57,14 @@ public class UploadController {
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
-		log.info("uploadFile : " +uploadFile[0].getOriginalFilename());
+//		log.info("uploadFile : " +uploadFile[0].getOriginalFilename());
 		List<AttachFileDTO> list = new ArrayList<>();
 
 		String uploadFolder = "C:\\kym\\eclipse\\workspace\\modify\\src\\main\\webapp\\resources";
 		String uploadFolderPath = "\\img";
 							
-		log.info("getFolder : "+uploadFolder+uploadFolderPath);
-		// make folder --------
+//		log.info("getFolder : "+uploadFolder+uploadFolderPath);
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
-//		File uploadPaths = new File(uploadFolder, uploadFolderPaths);
 		
 		if (uploadPath.exists() == false) {  
 			uploadPath.mkdirs();
@@ -78,13 +76,11 @@ public class UploadController {
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 
-			log.info("only file name: " + uploadFileName);
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			
-			log.info("only file name: " + uploadFileName);
+//			log.info("only file name: " + uploadFileName);
 			
-			log.info("only file name: " + uploadFileName.lastIndexOf("\\") + 1);
 			
 			attachDTO.setFileName(uploadFileName);
 
@@ -120,7 +116,6 @@ public class UploadController {
 	@PostMapping(value = "/uploadAjaxActions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPostt(MultipartFile[] tuploadFile) {
-		log.info("uploadFile : " +tuploadFile[0].getOriginalFilename());
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\kym\\eclipse\\workspace\\modify\\src\\main\\webapp\\resources";
 		String uploadFolderPaths = "\\thumb";
@@ -163,35 +158,6 @@ for (MultipartFile multipartFile : tuploadFile) {
 	}
 	
 	
-	
-	
-//	
-//	@GetMapping("/display")
-//	@ResponseBody
-//	public ResponseEntity<byte[]> getFile(String fileName) {
-//
-//		log.info("fileName: " + fileName);
-//		
-//		File file = new File("C:\\upload\\" + fileName);
-//		
-//		log.info("file: " + file);
-//
-//		ResponseEntity<byte[]> result = null;//???
-//
-//		try {
-//			HttpHeaders header = new HttpHeaders();
-//			
-//			header.add("Content-Type", Files.probeContentType(file.toPath()));
-//			
-//			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
-
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody			
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) throws UnsupportedEncodingException {
@@ -230,9 +196,6 @@ for (MultipartFile multipartFile : tuploadFile) {
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type) {
 
-		log.info("deleteFile: " + fileName);
-		log.info("deleteFile type: " + type);
-
 		File file;
 
 		try {
@@ -245,7 +208,6 @@ for (MultipartFile multipartFile : tuploadFile) {
 
 				String largeFileName = file.getAbsolutePath().replace("s_", "");
 
-				log.info("largeFileName: " + largeFileName);
 
 				file = new File(largeFileName);
 

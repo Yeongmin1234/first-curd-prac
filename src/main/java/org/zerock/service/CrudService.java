@@ -15,4 +15,5 @@ public interface CrudService {
 	public int update(CrudVO vo);
 	public int delete(int bno);
 	public List<BoardAttachVO> getAttachList(int bno);
+	
 }
